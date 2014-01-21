@@ -1,0 +1,34 @@
+{
+  "name": "Revealjs",
+  "description": "Revealjs, packaged to run on OpenSHift - open source cloud hosting",
+  "version": "0.0.2",
+  "private": true,
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "watchify": "~0.1.0",
+    "catw": "~0.0.1",
+    "tap": "~0.4.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryanj/slides.git"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "start-dev": "npm run watch & npm start",
+    "watch": "npm run watch-js & npm run watch-css",
+    "watch-css": "catw node_modules/reveal.js/css/reveal.min.css node_modules/reveal.js/css/theme/default.css node_modules/reveal.js/lib/css/zenburn.css -o static/css/slides.css -v",
+    "watch-js": "watchify js/slides.js -o static/js/slides.js -dv",
+    "build-js": "browserify js/slides.js > static/js/slides.js",
+    "build-css": "cat node_modules/reveal.js/css/reveal.min.css node_modules/reveal.js/css/theme/default.css node_modules/reveal.js/lib/css/zenburn.css > static/css/slides.css",
+    "keygen": "node js/keygen.js",
+    "build": "npm run keygen && npm run build-css && npm run build-js",
+    "test": "tap test/*.js"
+  },
+  "main": "server.js"
+}
